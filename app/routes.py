@@ -108,5 +108,5 @@ def delete_post(post_id):
         flash("You do not have permission to delete this post", )
     
     post_to_delete.delete()
-    flash(f"{post_to_delete.title"} has been deleted", 'info')
+    flash(f"{post_to_delete.title} has been deleted", 'info')
     return redirect(url_for('index'))
