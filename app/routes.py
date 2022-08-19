@@ -42,6 +42,7 @@ def create():
         new_post = Post(title=title, body=body, user_id=current_user.id)
         
         flash(f'{new_post.title}has been created.','secondary')
+        #Redirect back to home page
         return redirect(url_for('index'))
     return render_template('createpost.html',form=form)
 
@@ -80,7 +81,8 @@ def logout():
 @login_required
 def view_post(post_id):
     post = Post.query.get_or_404(post_id)
-    return f'The post_id is {post.title}'
+    return render_template('post.html', post=post)
+    
 
 @app.route('/posts/<post_id>/edit', methods=["GET","POST"])
 @login_required
@@ -106,6 +108,8 @@ def delete_post(post_id):
     post_to_delete = Post.query.get_or404(post_id)
     if post_to_delete.author != current_user:
         flash("You do not have permission to delete this post", )
+        return(redirect(url_for('index')))
+    #delete the post
     
     post_to_delete.delete()
     flash(f"{post_to_delete.title} has been deleted", 'info')

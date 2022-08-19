@@ -3,7 +3,7 @@
 {% block title %}Edit {{post.title}}{% endblock title %}
 
 {% block content%}
-<h2 class ="text-center">Create a New Post</h2>
+<h2 class ="text-center">Edit{{post.title}}</h2>
 
 <form method ="post">
     {{form.csrf_token}}
