@@ -9,7 +9,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(256), nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    posts = db.relationship('Post', backref='author',lazy='dynamic')
+    addresses = db.relationship('Address', backref='author',lazy='dynamic')
     
 
     def __init__(self, **kwargs):
@@ -33,10 +33,14 @@ class User(db.Model, UserMixin):
 def load_user(user_id):
     return User.query.get(user_id)
 
-class Post(db.Model):
+class Address(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50), nullable=False)
-    body = db.Column(db.String(255), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    streetaddress = db.Column(db.String(300), nullable=False)
+    city = db.Column(db.String(100), nullable=False)
+    state = db.Column(db.String(100), nullable=False)
+    zipcode = db.Column(db.String(100), nullable=False)
+    country = db.Column(db.String(100), nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_id =db.Column(db.Integer, db.ForeignKey('user.id')) # SQL equivalent = FOREIGN KEY(user_id) REFERENCES user(id)
 
@@ -46,15 +50,17 @@ class Post(db.Model):
         db.session.commit()
     
     def __repr__(self):
-        return f"<Post {self.id} | {self.title}>"
+        return f"<Address {self.id} | {self.name}>"
     
     def update(self, **kwargs):
         for key,value in kwargs.items():
-            if key in ('title','body'):
+            if key in ('name','streetaddress'):
                 setattr(self,key,value)
         db.session.commit()
     
     def delete(self):
         db.session.delete(self)
         db.session.commit()
+
+
 

@@ -16,7 +16,11 @@ class LoginForm(FlaskForm):
     submit = SubmitField()
 
 
-class PostForm(FlaskForm):
-    title = StringField('Title', validators=[InputRequired()])
-    body = StringField('Body', validators=[InputRequired()])
+class AddressForm(FlaskForm):
+    name = StringField('Name', validators=[InputRequired()])
+    streetaddress = StringField('Street Address', validators=[InputRequired()])
+    city = StringField('City', validators=[InputRequired()])
+    state = StringField('State', validators=[InputRequired()])
+    zipcode = StringField('Zip Code', validators=[InputRequired()])
+    country = StringField('country', validators=[InputRequired()])
     submit = SubmitField()

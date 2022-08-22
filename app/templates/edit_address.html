@@ -1,0 +1,32 @@
+{% extends 'base.html'%}
+
+{% block title %}Edit{{address.name}}{% endblock title %}
+
+{% block content%}
+<h2 class ="text-center">Edit {{address.name}}</h2>
+
+<form method ="post">
+    {{form.csrf_token}}
+    <div class="form-group">
+        {{ form.name.label }}
+        {{ form.name(class='form-control', placeholder='Enter Name') }}
+
+        {{ form.streetaddress.label }}
+        {{ form.streetaddress(class='form-control', placeholder='Enter Street Address') }}
+
+        {{ form.city.label }}
+        {{ form.city(class='form-control', placeholder='Enter City') }}
+
+        {{ form.state.label }}
+        {{ form.state(class='form-control', placeholder='Enter State') }}
+
+        {{ form.zipcode.label }}
+        {{ form.zipcode(class='form-control', placeholder='Enter Zip Code') }}
+
+        {{ form.country.label }}
+        {{ form.country(class='form-control', placeholder='Enter Country') }}
+
+        {{ form.submit(class='btn btn-secondary w-100 mt-3') }}
+    </div>
+</form>
+{% endblock content %}
